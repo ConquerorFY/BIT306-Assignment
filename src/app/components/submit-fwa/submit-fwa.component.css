@@ -1,0 +1,34 @@
+.submit-fwa-container {
+    padding: 40px 80px;
+}
+
+.submit-fwa-container h1 {
+    font-weight: bold;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+.submit-fwa-form {
+    max-width: 45vw;
+    margin: auto;
+    padding: 30px 40px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 5px 5px 15px -2px #3f51b5;
+}
+
+.submit-fwa-form * {
+    width: 100%;
+}
+
+.submit-fwa-radio-button {
+    margin: 5px;
+}
+
+.submit-fwa-form button {
+    display: block;
+    margin-top: 30px;
+    width: 20%;
+    margin-left: auto;
+}

@@ -59,12 +59,12 @@ export class RegisterComponent implements OnInit {
 
   resetForm() {
     this.selectedDepartment = '';
-    this.employeeId.setValue(0);
-    this.supervisorId.setValue(0);
-    this.name.setValue('');
-    this.username.setValue('');
-    this.position.setValue('');
-    this.email.setValue('');
+    this.employeeId.reset();
+    this.supervisorId.reset();
+    this.name.reset();
+    this.username.reset();
+    this.position.reset();
+    this.email.reset();
   }
 
   submitForm() {

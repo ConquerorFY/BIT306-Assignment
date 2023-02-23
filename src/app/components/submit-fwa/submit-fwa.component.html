@@ -1,0 +1,24 @@
+<div class="submit-fwa-container">
+    <h1>Submit Flexible Working Arrangements Request form</h1>
+
+    <div class="submit-fwa-form">
+        <mat-form-field appearance="fill">
+            <mat-label>Enter employee work type</mat-label>
+            <input matInput placeholder="eg. flexi-hour / work-from-home / hybrid" [formControl]="workType" required>
+            <mat-error *ngIf="workType.invalid">{{getErrorMessage(workType)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter description for request</mat-label>
+            <input matInput placeholder="eg. Description about FWA request" [formControl]="description" required>
+            <mat-error *ngIf="description.invalid">{{getErrorMessage(description)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter reason for request</mat-label>
+            <input matInput placeholder="eg. Reason for FWA request" [formControl]="reason" required>
+            <mat-error *ngIf="reason.invalid">{{getErrorMessage(reason)}}</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="submitForm()">Register</button>
+    </div>
+
+</div>

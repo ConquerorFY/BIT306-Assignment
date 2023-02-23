@@ -15,10 +15,19 @@ export class AppComponent {
 
   constructor(private router: Router, private dataService: DataService) {
     router.events.pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(event => {
-        const url = this.router.url;
-        this.isLoginPage = url === "/login" || (!this.dataService.isLoggedIn && url === "/");
-        this.userData = this.dataService.loggedInUserData;
+      .subscribe(_ => {
+        if (!this.dataService.isLoggedIn) {
+          this.isLoginPage = true;
+          this.router.navigate(['/login']);
+        } else {
+          const url = this.router.url;
+          if (url === "/login") {
+            this.isLoginPage = true;
+          } else {
+            this.isLoginPage = false;
+          }
+          this.userData = this.dataService.loggedInUserData
+        }
       });
   }
 

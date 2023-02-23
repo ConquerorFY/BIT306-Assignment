@@ -21,12 +21,24 @@ interface Employee {
   FWAStatus?: boolean
 };
 
+interface FWA {
+  requestID: number,
+  requestDate: string,
+  workType: string,
+  description: string,
+  reason: string,
+  status: string,
+  comment: string,
+  employeeID: number
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   users: Employee[] = employeeData;
   department: Department[] = departmentData;
+  fwa: FWA[] = fwaData;
   isLoggedIn: boolean = false;
   loggedInUserData: Employee;
 

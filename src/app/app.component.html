@@ -11,7 +11,7 @@
         <p *ngIf="userData.position === 'admin' || userData.position === 'supervisor'">View FWA Analytics</p>
         <p *ngIf="userData.position === 'supervisor'">Review FWA Request</p>
         <p *ngIf="userData.position === 'supervisor'">Review Employee Schedules</p>
-        <p *ngIf="userData.position === 'employee'">Submit FWA Request</p>
+        <p *ngIf="userData.position === 'employee'" (click)="navigate(['submitFwa'])">Submit FWA Request</p>
         <p *ngIf="userData.position === 'employee'">Update Daily Schedule</p>
     </mat-drawer>
 
