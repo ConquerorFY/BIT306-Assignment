@@ -1,0 +1,55 @@
+.nav-container {
+    height: 100vh;
+}
+
+.nav-spacer {
+    flex: 1 1 auto;
+}
+
+.nav-icon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.nav-sidenav {
+    min-width: 20vw;
+    background-color: rgb(255, 255, 255);
+    padding: 30px 20px 0 20px;
+}
+
+.nav-sidenav img {
+    display: block;
+    margin: auto;
+    border-radius: 100px;
+    width: 150px;
+    margin-bottom: 15px;
+}
+
+.nav-sidenav h1 {
+    text-align: center;
+    font-weight: 900;
+    margin-bottom: 0;
+}
+
+.nav-sidenav h3{
+    margin-top: 0;
+    font-size: 1em;
+    font-weight: normal;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.nav-sidenav p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 40px;  
+    background-color: #3f51b5;
+    padding: 10px 20px;
+    color: white;  
+    cursor: pointer;
+    border-radius: 6px;
+}

@@ -1,0 +1,42 @@
+[
+    {
+        "employeeID": 1,
+        "name": "John Davidson",
+        "username": "john",
+        "password": "123",
+        "email": "john@mail.com",
+        "position": "employee",
+        "deptID": 2,
+        "FWAStatus": false
+    },
+    {
+        "employeeID": 2,
+        "name": "Jinny Mayweather",
+        "username": "jinny",
+        "password": "123",
+        "email": "jinny@mail.com",
+        "position": "employee",
+        "deptID": 2,
+        "FWAStatus": false
+    },
+    {
+        "employeeID": 3,
+        "name": "Andrew Tate",
+        "username": "andrew",
+        "password": "123",
+        "email": "andrew@mail.com",
+        "position": "supervisor",
+        "deptID": 2,
+        "FWAStatus": false
+    },
+    {
+        "employeeID": 4,
+        "name": "Tristan Tate",
+        "username": "tristan",
+        "password": "123",
+        "email": "tristan@mail.com",
+        "position": "supervisor",
+        "deptID": 2,
+        "FWAStatus": false
+    }
+]

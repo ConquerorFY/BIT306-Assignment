@@ -1,0 +1,10 @@
+[
+    {
+        "deptID": 1,
+        "deptName": "Human Resource"
+    },
+    {
+        "deptID": 2,
+        "deptName": "Information Technology"
+    }
+]

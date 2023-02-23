@@ -1,0 +1,11 @@
+[
+    {
+        "employeeID": 1,
+        "name": "Gilbert Wong",
+        "username": "gilbert",
+        "password": "123",
+        "position": "admin",
+        "email": "gilbert@mail.com",
+        "deptID": 1
+    }
+]
