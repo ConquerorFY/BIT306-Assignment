@@ -1,17 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import employeeData from "../../../data/employee.json";
 import { Router } from '@angular/router';
-
-interface Employee {
-  employeeID: number,
-  name: string,
-  username: string,
-  password: string,
-  email: string,
-  position: string,
-  deptID: number,
-  FWAStatus: boolean
-};
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -23,23 +12,24 @@ export class LoginComponent implements OnInit {
   password: string = "";
   show: boolean = false;
   showString: string = "";
-  employeeData: Employee[] = employeeData;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit(): void {
   }
 
   validateLogin(): boolean {
-    for(let i = 0; i < employeeData.length; i++) {
-      if (employeeData[i].username === this.username) {
-        if (employeeData[i].password === this.password) {
-          localStorage.setItem("userData", JSON.stringify(employeeData[i]));
+    for (let i = 0; i < this.dataService.users.length; i++) {
+      if (this.dataService.users[i].username === this.username) {
+        if (this.dataService.users[i].password === this.password) {
+          this.dataService.isLoggedIn = true;
+          this.dataService.loggedInUserData = this.dataService.users[i]
           this.showString = "Login success !!";
           return true;
         }
       }
     }
+    this.dataService.isLoggedIn = false;
     this.showString = "Incorrect Input! Please try again!";
     return false;
   }
@@ -48,7 +38,7 @@ export class LoginComponent implements OnInit {
     const validate = this.validateLogin();
     this.clear();
 
-    if(validate) {
+    if (validate) {
       this.router.navigate(['/home']);
     }
   }

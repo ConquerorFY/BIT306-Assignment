@@ -1,0 +1,58 @@
+.registration-container {
+    padding: 40px 80px;
+}
+
+.registration-container h1 {
+    font-weight: bold;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.registration-container .registration-department {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    font-size: 1.2em;
+}
+
+.registration-container .registration-department .chosen-department {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.registration-radio-group {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0 15px 20px;
+    align-items: flex-start;
+    font-weight: bold;
+}
+
+.registration-form {
+    max-width: 45vw;
+    margin: auto;
+    padding: 30px 40px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 5px 5px 15px -2px #3f51b5;
+}
+
+.registration-form * {
+    width: 100%;
+}
+
+.registration-radio-button {
+    margin: 5px;
+}
+
+.registration-form button {
+    display: block;
+    margin-top: 30px;
+    width: 20%;
+    margin-left: auto;
+}

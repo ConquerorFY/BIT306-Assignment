@@ -1,12 +1,18 @@
-<router-outlet *ngIf="isLogin"></router-outlet>
+<router-outlet *ngIf="isLoginPage"></router-outlet>
 
-<mat-drawer-container *ngIf="!isLogin" class="nav-container" autosize>
+<mat-drawer-container *ngIf="!isLoginPage" class="nav-container" autosize>
     <mat-drawer #drawer class="nav-sidenav" mode="side">
-        <img src="/assets/supervisor.png" />
-        <h1>Jason Davids</h1>
-        <h3>Employee</h3>
-        <p>Submit Flexible Working Arrangements Request</p>
-        <p>Update Daily Schedule</p>
+        <img
+            [src]="userData.position === 'employee' ? '/assets/employee.png' : userData.position === 'supervisor' ? '/assets/supervisor.png' : userData.position === 'admin' ? '/assets/admin.png' : ''" />
+        <h1>{{ userData.name }}</h1>
+        <h3>{{ userData.position.toUpperCase() }}</h3>
+        <p (click)="navigate(['home'])">Home</p>
+        <p *ngIf="userData.position === 'admin'" (click)="navigate(['register'])">Register Employee</p>
+        <p *ngIf="userData.position === 'admin' || userData.position === 'supervisor'">View FWA Analytics</p>
+        <p *ngIf="userData.position === 'supervisor'">Review FWA Request</p>
+        <p *ngIf="userData.position === 'supervisor'">Review Employee Schedules</p>
+        <p *ngIf="userData.position === 'employee'">Submit FWA Request</p>
+        <p *ngIf="userData.position === 'employee'">Update Daily Schedule</p>
     </mat-drawer>
 
     <mat-toolbar color="primary">

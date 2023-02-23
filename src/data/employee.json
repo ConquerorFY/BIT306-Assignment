@@ -6,6 +6,7 @@
         "password": "123",
         "email": "john@mail.com",
         "position": "employee",
+        "supvID": 3,
         "deptID": 2,
         "FWAStatus": false
     },
@@ -16,6 +17,7 @@
         "password": "123",
         "email": "jinny@mail.com",
         "position": "employee",
+        "supvID": 4,
         "deptID": 2,
         "FWAStatus": false
     },
@@ -26,8 +28,7 @@
         "password": "123",
         "email": "andrew@mail.com",
         "position": "supervisor",
-        "deptID": 2,
-        "FWAStatus": false
+        "deptID": 2
     },
     {
         "employeeID": 4,
@@ -36,7 +37,15 @@
         "password": "123",
         "email": "tristan@mail.com",
         "position": "supervisor",
-        "deptID": 2,
-        "FWAStatus": false
+        "deptID": 2
+    },
+    {
+        "employeeID": 5,
+        "name": "Gilbert Wong",
+        "username": "gilbert",
+        "password": "123",
+        "email": "gilbert@mail.com",
+        "position": "admin",
+        "deptID": 1
     }
 ]

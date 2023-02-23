@@ -1,6 +1,7 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +10,25 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'bit306';
-  isLogin = false;
+  isLoginPage = false;
+  userData = null;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dataService: DataService) {
     router.events.pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(event => {
         const url = this.router.url;
-        this.isLogin = url === "/login" || url === "/";
+        this.isLoginPage = url === "/login" || (!this.dataService.isLoggedIn && url === "/");
+        this.userData = this.dataService.loggedInUserData;
       });
   }
 
   logout() {
-    localStorage.removeItem("userData");
+    this.dataService.loggedInUserData = null;
+    this.dataService.isLoggedIn = false;
     this.router.navigate(["/login"]);
+  }
+
+  navigate(route) {
+    this.router.navigate([`/${route}`]);
   }
 }
