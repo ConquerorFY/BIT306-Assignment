@@ -1,3 +1,74 @@
+<h1>Home Page</h1>
 <div class="home-container">
-    Home Works!
-</div>  
+    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'admin'" (click)="navigate('register')">
+        <mat-card-header>
+            <mat-card-title class="home-card-title">Register Employee</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image class="home-card-image" src="../../../assets/register-employee.png" alt="register-employee">
+        <mat-card-content>
+            <p class="home-card-content">
+                Click here to register new employees
+            </p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'admin' || dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('')">
+        <mat-card-header>
+            <mat-card-title class="home-card-title">View FWA Analytics</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image class="home-card-image" src="../../../assets/view-fwa.png" alt="view-fwa">
+        <mat-card-content>
+            <p class="home-card-content">
+                Click here to view FWA analytics
+            </p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('')">
+        <mat-card-header>
+            <mat-card-title class="home-card-title">Review FWA Requests</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image class="home-card-image" src="../../../assets/review-fwa.png" alt="review-fwa">
+        <mat-card-content>
+            <p class="home-card-content">
+                Click here to review FWA requests
+            </p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('')">
+        <mat-card-header>
+            <mat-card-title class="home-card-title">Register Employee Schedules</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image class="home-card-image" src="../../../assets/review-schedule.png" alt="review-schedule">
+        <mat-card-content>
+            <p class="home-card-content">
+                Click here to review employee schedule
+            </p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'employee'" (click)="navigate('submitFwa')">
+        <mat-card-header>
+            <mat-card-title class="home-card-title">Submit FWA Request</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image class="home-card-image" src="../../../assets/submit-fwa.png" alt="submit-fwa">
+        <mat-card-content>
+            <p class="home-card-content">
+                Click here to submit FWA request
+            </p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'employee'" (click)="navigate('')">
+        <mat-card-header>
+            <mat-card-title class="home-card-title">Update Daily Schedule</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image class="home-card-image" src="../../../assets/update-schedule.png" alt="update-schedule">
+        <mat-card-content>
+            <p class="home-card-content">
+                Click here to update daily schedule
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,48 @@
+h1 {
+    font-weight: 900;
+    font-size: 2em;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.home-container {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 40px 40px 20px 40px;
+}
+
+.home-card {
+    padding: 30px 40px;
+    width: max-content;
+    cursor: pointer;
+    margin-bottom: 50px;
+    box-shadow: 3px 5px 5px -2px #3f51b5
+}
+
+.mat-card-header {
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.home-card-image {
+    width: 200px;
+    margin: auto;
+}
+
+.mat-card-content {
+    width: max-content;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.home-card-title {
+    font-weight: 900;
+    font-size: 1.4em;
+}
+
+.home-card-content {
+    font-style: italic;
+    font-size: 1em;
+    margin-top: 10px;
+}

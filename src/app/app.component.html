@@ -6,12 +6,12 @@
             [src]="userData.position === 'employee' ? '/assets/employee.png' : userData.position === 'supervisor' ? '/assets/supervisor.png' : userData.position === 'admin' ? '/assets/admin.png' : ''" />
         <h1>{{ userData.name }}</h1>
         <h3>{{ userData.position.toUpperCase() }}</h3>
-        <p (click)="navigate(['home'])">Home</p>
-        <p *ngIf="userData.position === 'admin'" (click)="navigate(['register'])">Register Employee</p>
+        <p (click)="navigate(['home']); drawer.toggle()">Home</p>
+        <p *ngIf="userData.position === 'admin'" (click)="navigate(['register']); drawer.toggle()">Register Employee</p>
         <p *ngIf="userData.position === 'admin' || userData.position === 'supervisor'">View FWA Analytics</p>
         <p *ngIf="userData.position === 'supervisor'">Review FWA Request</p>
         <p *ngIf="userData.position === 'supervisor'">Review Employee Schedules</p>
-        <p *ngIf="userData.position === 'employee'" (click)="navigate(['submitFwa'])">Submit FWA Request</p>
+        <p *ngIf="userData.position === 'employee'" (click)="navigate(['submitFwa']); drawer.toggle()">Submit FWA Request</p>
         <p *ngIf="userData.position === 'employee'">Update Daily Schedule</p>
     </mat-drawer>
 
