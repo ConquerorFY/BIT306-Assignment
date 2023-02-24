@@ -26,11 +26,14 @@ export class LoginComponent implements OnInit {
           this.dataService.loggedInUserData = this.dataService.users[i]
           this.showString = "Login success !!";
           return true;
+        } else {
+          this.showString = "Invalid Password!";
+          return false;
         }
       }
     }
     this.dataService.isLoggedIn = false;
-    this.showString = "Incorrect Input! Please try again!";
+    this.showString = "Invalid Employee ID!";
     return false;
   }
 

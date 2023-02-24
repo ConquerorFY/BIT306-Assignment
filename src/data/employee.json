@@ -20,6 +20,36 @@
         "FWAStatus": "New"
     },
     {
+        "employeeID": "e011",
+        "name": "James Morant",
+        "password": "123",
+        "email": "james@mail.com",
+        "position": "employee",
+        "supvID": "e003",
+        "deptID": 1,
+        "FWAStatus": "New"
+    },
+    {
+        "employeeID": "e012",
+        "name": "Jenny Lau",
+        "password": "123",
+        "email": "jenny@mail.com",
+        "position": "employee",
+        "supvID": "e004",
+        "deptID": 1,
+        "FWAStatus": "New"
+    },
+    {
+        "employeeID": "e013",
+        "name": "Jeremy Law",
+        "password": "123",
+        "email": "jeremy@mail.com",
+        "position": "employee",
+        "supvID": "e003",
+        "deptID": 1,
+        "FWAStatus": "New"
+    },
+    {
         "employeeID": "e003",
         "name": "Andrew Tate",
         "password": "123",

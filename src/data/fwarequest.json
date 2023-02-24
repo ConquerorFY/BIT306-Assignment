@@ -6,7 +6,7 @@
         "description": "None",
         "reason": "Too far",
         "status": "Pending",
-        "comment": "None",
+        "comment": "",
         "employeeID": "e001"
     },
     {
@@ -16,7 +16,7 @@
         "description": "None",
         "reason": "Too far",
         "status": "Accepted",
-        "comment": "None",
+        "comment": "",
         "employeeID": "e002"
     },
     {
@@ -26,8 +26,8 @@
         "description": "None",
         "reason": "Too far",
         "status": "Pending",
-        "comment": "None",
-        "employeeID": "e001"
+        "comment": "",
+        "employeeID": "e011"
     },
     {
         "requestID": 4,
@@ -36,8 +36,8 @@
         "description": "None",
         "reason": "Too far",
         "status": "Pending",
-        "comment": "None",
-        "employeeID": "e002"
+        "comment": "",
+        "employeeID": "e012"
     },
     {
         "requestID": 5,
@@ -46,7 +46,7 @@
         "description": "None",
         "reason": "Too far",
         "status": "Rejected",
-        "comment": "None",
-        "employeeID": "e001"
+        "comment": "",
+        "employeeID": "e013"
     }
 ]
