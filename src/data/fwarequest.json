@@ -1,11 +1,51 @@
 [
     {
         "requestID": 1,
-        "requestDate": "2023-1-1",
-        "workType": "Hybrid",
+        "requestDate": "2020-1-1",
+        "workType": "hybrid",
         "description": "None",
         "reason": "Too far",
         "status": "Pending",
+        "comment": "None",
+        "employeeID": "e001"
+    },
+    {
+        "requestID": 2,
+        "requestDate": "2021-1-1",
+        "workType": "flex-hours",
+        "description": "None",
+        "reason": "Too far",
+        "status": "Accepted",
+        "comment": "None",
+        "employeeID": "e002"
+    },
+    {
+        "requestID": 3,
+        "requestDate": "2022-1-1",
+        "workType": "work-from-home",
+        "description": "None",
+        "reason": "Too far",
+        "status": "Pending",
+        "comment": "None",
+        "employeeID": "e001"
+    },
+    {
+        "requestID": 4,
+        "requestDate": "2023-1-1",
+        "workType": "hybrid",
+        "description": "None",
+        "reason": "Too far",
+        "status": "Pending",
+        "comment": "None",
+        "employeeID": "e002"
+    },
+    {
+        "requestID": 5,
+        "requestDate": "2019-1-1",
+        "workType": "hybrid",
+        "description": "None",
+        "reason": "Too far",
+        "status": "Rejected",
         "comment": "None",
         "employeeID": "e001"
     }

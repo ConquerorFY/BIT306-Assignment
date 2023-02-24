@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
       "position": this.position.value,
       "supvID": this.supervisorId.value,
       "deptID": this.findDepartmentID(),
-      "FWAStatus": false
+      "FWAStatus": "New"
     } :
       {
         "employeeID": this.employeeId.value,

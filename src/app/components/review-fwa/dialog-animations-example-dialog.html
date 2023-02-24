@@ -1,0 +1,40 @@
+<div class="dialog-container">
+    <h1 mat-dialog-title>{{"Employee ID " + selectedRequest.employeeID + " FWA Request"}}</h1>
+    <div mat-dialog-content class="dialog-content">
+        <table>
+            <tr>
+                <td>Request ID: </td>
+                <td>{{selectedRequest.requestID}}</td>
+            </tr>
+            <tr>
+                <td>Request Date: </td>
+                <td>{{selectedRequest.requestDate}}</td>
+            </tr>
+            <tr>
+                <td>Work Type: </td>
+                <td>{{selectedRequest.workType}}</td>
+            </tr>
+            <tr>
+                <td>Description: </td>
+                <td>{{selectedRequest.description}}</td>
+            </tr>
+            <tr>
+                <td>Reason: </td>
+                <td>{{selectedRequest.reason}}</td>
+            </tr>
+            <tr>
+                <td>Status: </td>
+                <td>{{selectedRequest.status}}</td>
+            </tr>
+            <tr>
+                <td>Comment: </td>
+                <td><input type="text" placeholder="Comments about Request"
+                        (input)="inputValue($event)" /></td>
+            </tr>
+        </table>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+        <button mat-button mat-dialog-close (click)="handleClick('Rejected')">Reject</button>
+        <button mat-button mat-dialog-close cdkFocusInitial (click)="handleClick('Accepted')">Accept</button>
+    </div>
+</div>

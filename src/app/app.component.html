@@ -9,9 +9,11 @@
         <p (click)="navigate(['home']); drawer.toggle()">Home</p>
         <p *ngIf="userData.position === 'admin'" (click)="navigate(['register']); drawer.toggle()">Register Employee</p>
         <p *ngIf="userData.position === 'admin' || userData.position === 'supervisor'">View FWA Analytics</p>
-        <p *ngIf="userData.position === 'supervisor'">Review FWA Request</p>
+        <p *ngIf="userData.position === 'supervisor'" (click)="navigate(['reviewFwa']); drawer.toggle()">Review FWA
+            Request</p>
         <p *ngIf="userData.position === 'supervisor'">Review Employee Schedules</p>
-        <p *ngIf="userData.position === 'employee'" (click)="navigate(['submitFwa']); drawer.toggle()">Submit FWA Request</p>
+        <p *ngIf="userData.position === 'employee'" (click)="navigate(['submitFwa']); drawer.toggle()">Submit FWA
+            Request</p>
         <p *ngIf="userData.position === 'employee'">Update Daily Schedule</p>
     </mat-drawer>
 

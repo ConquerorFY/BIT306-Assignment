@@ -7,7 +7,7 @@
         "position": "employee",
         "supvID": "e003",
         "deptID": 2,
-        "FWAStatus": false
+        "FWAStatus": "New"
     },
     {
         "employeeID": "e002",
@@ -17,7 +17,7 @@
         "position": "employee",
         "supvID": "e004",
         "deptID": 2,
-        "FWAStatus": false
+        "FWAStatus": "New"
     },
     {
         "employeeID": "e003",

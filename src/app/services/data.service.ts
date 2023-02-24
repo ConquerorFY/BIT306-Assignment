@@ -17,7 +17,7 @@ interface Employee {
   position: string,
   supvID?: string,
   deptID: number,
-  FWAStatus?: boolean
+  FWAStatus?: string
 }
 
 interface FWA {
@@ -40,6 +40,7 @@ export class DataService {
   fwa: FWA[] = fwaData;
   isLoggedIn: boolean = false;
   loggedInUserData: Employee;
+  reviewFwaSelectedRequests: number;
 
   constructor() { }
 }

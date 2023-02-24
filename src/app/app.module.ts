@@ -13,11 +13,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SubmitFwaComponent } from './components/submit-fwa/submit-fwa.component';
+import { ReviewFwaComponent } from './components/review-fwa/review-fwa.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,8 @@ import { SubmitFwaComponent } from './components/submit-fwa/submit-fwa.component
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    SubmitFwaComponent
+    SubmitFwaComponent,
+    ReviewFwaComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,11 @@ import { SubmitFwaComponent } from './components/submit-fwa/submit-fwa.component
     MatSelectModule,
     MatRadioModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
