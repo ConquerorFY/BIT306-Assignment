@@ -11,10 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class RegisterComponent implements OnInit {
   selectedDepartment: string = '';
   department = this.dataService.department;
-  employeeId = new FormControl(0, [Validators.required, Validators.pattern(/\d+/)]);
-  supervisorId = new FormControl(0, [Validators.pattern(/\d+/)]);
+  employeeId = new FormControl('', [Validators.required]);
+  supervisorId = new FormControl('', []);
   name = new FormControl('', [Validators.required]);
-  username = new FormControl('', [Validators.required]);
   position = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
 
@@ -27,15 +26,12 @@ export class RegisterComponent implements OnInit {
     if (formControl.hasError('required')) {
       return 'You must enter a value!';
     }
-    else if (formControl.hasError('pattern')) {
-      return 'Value must only contain digits!';
-    }
     return formControl.hasError('email') ? 'Not a valid email!' : '';
   }
 
-  findSupervisorName(id: number) {
+  findSupervisorName(id: string) {
     const matchedSupervisor = this.dataService.users.filter((data) => {
-      return data.employeeID == id;
+      return data.employeeID === id;
     })[0]
 
     return matchedSupervisor?.name ? matchedSupervisor?.name : '-';
@@ -62,7 +58,6 @@ export class RegisterComponent implements OnInit {
     this.employeeId.reset();
     this.supervisorId.reset();
     this.name.reset();
-    this.username.reset();
     this.position.reset();
     this.email.reset();
   }
@@ -70,20 +65,18 @@ export class RegisterComponent implements OnInit {
   submitForm() {
     let newPassword = this.randomPasswordGenerator(8);
     let newUser = this.supervisorId.value.length > 0 ? {
-      "employeeID": parseInt(this.employeeId.value),
+      "employeeID": this.employeeId.value,
       "name": this.name.value,
-      "username": this.username.value,
       "password": newPassword,
       "email": this.email.value,
       "position": this.position.value,
-      "supvID": parseInt(this.supervisorId.value),
+      "supvID": this.supervisorId.value,
       "deptID": this.findDepartmentID(),
       "FWAStatus": false
     } :
       {
-        "employeeID": parseInt(this.employeeId.value),
+        "employeeID": this.employeeId.value,
         "name": this.name.value,
-        "username": this.username.value,
         "password": newPassword,
         "email": this.email.value,
         "position": this.position.value,

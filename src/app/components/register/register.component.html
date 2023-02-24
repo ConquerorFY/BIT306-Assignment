@@ -15,18 +15,13 @@
     <div class="registration-form" *ngIf="selectedDepartment.length > 0">
         <mat-form-field appearance="fill">
             <mat-label>Enter employee's employee ID</mat-label>
-            <input matInput placeholder="eg. 10" [formControl]="employeeId" required>
+            <input matInput placeholder="eg. e009" [formControl]="employeeId" required>
             <mat-error *ngIf="employeeId.invalid">{{getErrorMessage(employeeId)}}</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Enter employee's name</mat-label>
             <input matInput placeholder="eg. John Cena" [formControl]="name" required>
             <mat-error *ngIf="name.invalid">{{getErrorMessage(name)}}</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Enter employee's username</mat-label>
-            <input matInput placeholder="eg. jack" [formControl]="username" required>
-            <mat-error *ngIf="username.invalid">{{getErrorMessage(username)}}</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Enter employee's position</mat-label>
@@ -40,7 +35,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Enter employee's supervisor employee ID</mat-label>
-            <input matInput placeholder="eg. 10" [formControl]="supervisorId" required>
+            <input matInput placeholder="eg. e009" [formControl]="supervisorId" required>
             <mat-error *ngIf="supervisorId.invalid">{{getErrorMessage(supervisorId)}}</mat-error>
             <mat-hint *ngIf="supervisorId.valid">{{ "Supervisor Name: " + findSupervisorName(supervisorId.value)
                 }}</mat-hint>

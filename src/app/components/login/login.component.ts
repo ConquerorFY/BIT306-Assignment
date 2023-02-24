@@ -8,7 +8,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username: string = "";
+  employeeID: string = "";
   password: string = "";
   show: boolean = false;
   showString: string = "";
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   validateLogin(): boolean {
     for (let i = 0; i < this.dataService.users.length; i++) {
-      if (this.dataService.users[i].username === this.username) {
+      if (this.dataService.users[i].employeeID === this.employeeID) {
         if (this.dataService.users[i].password === this.password) {
           this.dataService.isLoggedIn = true;
           this.dataService.loggedInUserData = this.dataService.users[i]
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   }
 
   clear() {
-    this.username = "";
+    this.employeeID = "";
     this.password = "";
     this.show = true;
   }

@@ -1,48 +1,43 @@
 [
     {
-        "employeeID": 1,
+        "employeeID": "e001",
         "name": "John Davidson",
-        "username": "john",
         "password": "123",
         "email": "john@mail.com",
         "position": "employee",
-        "supvID": 3,
+        "supvID": "e003",
         "deptID": 2,
         "FWAStatus": false
     },
     {
-        "employeeID": 2,
+        "employeeID": "e002",
         "name": "Jinny Mayweather",
-        "username": "jinny",
         "password": "123",
         "email": "jinny@mail.com",
         "position": "employee",
-        "supvID": 4,
+        "supvID": "e004",
         "deptID": 2,
         "FWAStatus": false
     },
     {
-        "employeeID": 3,
+        "employeeID": "e003",
         "name": "Andrew Tate",
-        "username": "andrew",
         "password": "123",
         "email": "andrew@mail.com",
         "position": "supervisor",
         "deptID": 2
     },
     {
-        "employeeID": 4,
+        "employeeID": "e004",
         "name": "Tristan Tate",
-        "username": "tristan",
         "password": "123",
         "email": "tristan@mail.com",
         "position": "supervisor",
         "deptID": 2
     },
     {
-        "employeeID": 5,
+        "employeeID": "e005",
         "name": "Gilbert Wong",
-        "username": "gilbert",
         "password": "123",
         "email": "gilbert@mail.com",
         "position": "admin",

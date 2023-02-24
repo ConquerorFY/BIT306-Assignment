@@ -10,16 +10,15 @@ interface Department {
 }
 
 interface Employee {
-  employeeID: number,
+  employeeID: string,
   name: string,
-  username: string,
   password: string,
   email: string,
   position: string,
-  supvID?: number,
+  supvID?: string,
   deptID: number,
   FWAStatus?: boolean
-};
+}
 
 interface FWA {
   requestID: number,
@@ -29,7 +28,7 @@ interface FWA {
   reason: string,
   status: string,
   comment: string,
-  employeeID: number
+  employeeID: string
 }
 
 @Injectable({
