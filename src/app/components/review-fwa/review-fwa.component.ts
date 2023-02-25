@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import FWA from 'src/app/interfaces/fwa';
 
 @Component({
   selector: 'app-review-fwa',
@@ -62,7 +63,7 @@ export class ReviewFwaComponent implements OnInit {
   styleUrls: ['./dialog-animations-example-dialog.css']
 })
 export class DialogAnimationsExampleDialog implements OnInit {
-  selectedRequest = null;
+  selectedRequest: FWA;
   comments = '';
 
   constructor(public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>, public dataService: DataService, private router: Router) { }

@@ -1,5 +1,6 @@
 .nav-container {
-    height: 100vh;
+    min-height: 100vh;
+    position: relative;
 }
 
 .nav-spacer {
@@ -52,4 +53,15 @@
     color: white;  
     cursor: pointer;
     border-radius: 6px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+}
+
+.footer span {
+    display: block;
+    width: max-content;
+    margin: auto;
 }
