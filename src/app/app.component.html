@@ -14,7 +14,7 @@
         <p *ngIf="userData.position === 'supervisor'">Review Employee Schedules</p>
         <p *ngIf="userData.position === 'employee'" (click)="navigate(['submitFwa']); drawer.toggle()">Submit FWA
             Request</p>
-        <p *ngIf="userData.position === 'employee'">Update Daily Schedule</p>
+        <p *ngIf="userData.position === 'employee'" (click)="navigate(['updateSchedule']); drawer.toggle()">Update Daily Schedule</p>
     </mat-drawer>
 
     <mat-toolbar color="primary">

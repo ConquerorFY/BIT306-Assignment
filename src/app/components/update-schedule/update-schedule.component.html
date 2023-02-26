@@ -1,0 +1,44 @@
+<div class="update-schedule-container">
+    <h1>Employee Update Daily Schedule Form</h1>
+
+    <div class="update-schedule-department">
+        <label id="update-schedule-radio-group-label">Please select a date: </label>
+        <mat-form-field appearance="fill" class="update-schedule-radio-group">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="datepicker" (dateInput)="getDateSchedule($event.value)">
+            <mat-hint>MM/DD</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+            </mat-datepicker>
+        </mat-form-field>
+        <label class="chosen-date">Your work schedule on <b>{{ selectedDate }} </b></label>
+    </div>
+
+    <div class="update-schedule-content" *ngIf="selectedDate.length > 0">
+        <div class="update-schedule-employee-info">
+            <span>Employee ID: <b>{{ employeeData.employeeID }}</b></span>
+            <span>Employee Name: <b>{{ employeeData.name }}</b></span>
+            <span>Supervisor Name: <b>{{ findSupervisorName(employeeData.supvID) }}</b></span>
+        </div>
+        <div class="update-schedule-form">
+            <mat-form-field appearance="fill">
+                <mat-label>Enter employee's work location</mat-label>
+                <input matInput placeholder="eg. Home / Office" [formControl]="location" required>
+                <mat-error *ngIf="location.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter employee's work hours</mat-label>
+                <input matInput placeholder="eg. 8am - 4pm / 9am - 5pm / 10am - 6pm" [formControl]="hours" required>
+                <mat-error *ngIf="hours.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter employee's work report</mat-label>
+                <input matInput placeholder="eg. Work report for the day" [formControl]="report" required>
+                <mat-error *ngIf="report.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="submitForm()">{{ buttonText }}</button>
+        </div>
+    </div>
+
+</div>

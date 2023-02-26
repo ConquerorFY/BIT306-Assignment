@@ -1,6 +1,6 @@
 <h1>Home Page</h1>
 <div class="home-container">
-    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'admin'" (click)="navigate('register')">
+    <mat-card appearance="outlined" class="home-card" *ngIf="dataService.loggedInUserData.position === 'admin'" (click)="navigate('register')">
         <mat-card-header>
             <mat-card-title class="home-card-title">Register Employee</mat-card-title>
         </mat-card-header>
@@ -12,7 +12,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'admin' || dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('')">
+    <mat-card appearance="outlined" class="home-card" *ngIf="dataService.loggedInUserData.position === 'admin' || dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('')">
         <mat-card-header>
             <mat-card-title class="home-card-title">View FWA Analytics</mat-card-title>
         </mat-card-header>
@@ -24,7 +24,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('reviewFwa')">
+    <mat-card appearance="outlined" class="home-card" *ngIf="dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('reviewFwa')">
         <mat-card-header>
             <mat-card-title class="home-card-title">Review FWA Requests</mat-card-title>
         </mat-card-header>
@@ -36,7 +36,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('')">
+    <mat-card appearance="outlined" class="home-card" *ngIf="dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('')">
         <mat-card-header>
             <mat-card-title class="home-card-title">Register Employee Schedules</mat-card-title>
         </mat-card-header>
@@ -48,7 +48,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'employee'" (click)="navigate('submitFwa')">
+    <mat-card appearance="outlined" class="home-card" *ngIf="dataService.loggedInUserData.position === 'employee'" (click)="navigate('submitFwa')">
         <mat-card-header>
             <mat-card-title class="home-card-title">Submit FWA Request</mat-card-title>
         </mat-card-header>
@@ -60,7 +60,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="home-card" *ngIf="dataService.loggedInUserData.position === 'employee'" (click)="navigate('')">
+    <mat-card appearance="outlined" class="home-card" *ngIf="dataService.loggedInUserData.position === 'employee'" (click)="navigate('updateSchedule')">
         <mat-card-header>
             <mat-card-title class="home-card-title">Update Daily Schedule</mat-card-title>
         </mat-card-header>

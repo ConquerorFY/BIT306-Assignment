@@ -20,7 +20,7 @@ h1 {
     box-shadow: 3px 5px 5px -2px #3f51b5
 }
 
-.mat-card-header {
+.mat-mdc-card-header {
     justify-content: center;
     margin-bottom: 10px;
 }
@@ -30,7 +30,7 @@ h1 {
     margin: auto;
 }
 
-.mat-card-content {
+.mat-mdc-card-content {
     width: max-content;
     margin: auto;
     margin-top: 20px;

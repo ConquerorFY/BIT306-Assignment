@@ -1,0 +1,68 @@
+.update-schedule-container {
+    padding: 40px 80px;
+    margin-bottom: 100px;
+}
+
+.update-schedule-container h1 {
+    font-weight: bold;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.update-schedule-container .update-schedule-department {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    font-size: 1.2em;
+}
+
+.update-schedule-container .update-schedule-department .chosen-date {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.update-schedule-radio-group {
+    margin: 15px 0 20px 20px;
+    font-weight: bold;
+}
+
+.update-schedule-content .update-schedule-employee-info {
+    display: flex;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 15px 200px;
+    background-color: #3f51b5;
+    color: white;
+    justify-content: space-between;
+    border-radius: 6px;
+}
+
+.update-schedule-form {
+    max-width: 45vw;
+    margin: auto;
+    padding: 30px 40px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 5px 5px 15px -2px #3f51b5;
+}
+
+.update-schedule-form * {
+    width: 100%;
+}
+
+.update-schedule-radio-button {
+    margin: 5px;
+}
+
+.update-schedule-form button {
+    display: block;
+    margin-top: 30px;
+    width: 20%;
+    margin-left: auto;
+}
