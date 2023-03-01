@@ -26,6 +26,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { SubmitFwaComponent } from './components/submit-fwa/submit-fwa.component';
 import { ReviewFwaComponent } from './components/review-fwa/review-fwa.component';
 import { UpdateScheduleComponent } from './components/update-schedule/update-schedule.component';
+import { ReviewScheduleComponent } from './components/review-schedule/review-schedule.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UpdateScheduleComponent } from './components/update-schedule/update-sch
     RegisterComponent,
     SubmitFwaComponent,
     ReviewFwaComponent,
-    UpdateScheduleComponent
+    UpdateScheduleComponent,
+    ReviewScheduleComponent
   ],
   imports: [
     BrowserModule,

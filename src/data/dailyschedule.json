@@ -3,9 +3,45 @@
         "scheduleID": 1,
         "date": "2023-01-01",
         "workLocation": "Home",
-        "workHours": "",
+        "workHours": "8am - 4pm",
         "workReport": "None",
         "supervisorComments": "Still under review",
         "employeeID": "e001"
+    },
+    {
+        "scheduleID": 2,
+        "date": "2023-01-02",
+        "workLocation": "Hybrid",
+        "workHours": "9am - 5pm",
+        "workReport": "None",
+        "supervisorComments": "Still under review",
+        "employeeID": "e002"
+    },
+    {
+        "scheduleID": 3,
+        "date": "2023-01-01",
+        "workLocation": "Ofice",
+        "workHours": "10am - 6pm",
+        "workReport": "None",
+        "supervisorComments": "Still under review",
+        "employeeID": "e011"
+    },
+    {
+        "scheduleID": 4,
+        "date": "2023-01-02",
+        "workLocation": "Home",
+        "workHours": "8am - 4pm",
+        "workReport": "None",
+        "supervisorComments": "Still under review",
+        "employeeID": "e012"
+    },
+    {
+        "scheduleID": 5,
+        "date": "2023-01-01",
+        "workLocation": "Hybrid",
+        "workHours": "9am - 5pm",
+        "workReport": "None",
+        "supervisorComments": "Still under review",
+        "employeeID": "e013"
     }
 ]

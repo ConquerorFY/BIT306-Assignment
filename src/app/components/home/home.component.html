@@ -36,9 +36,9 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card appearance="outlined" class="home-card" *ngIf="dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('')">
+    <mat-card appearance="outlined" class="home-card" *ngIf="dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('reviewSchedule')">
         <mat-card-header>
-            <mat-card-title class="home-card-title">Register Employee Schedules</mat-card-title>
+            <mat-card-title class="home-card-title">Review Employee Schedules</mat-card-title>
         </mat-card-header>
         <img mat-card-image class="home-card-image" src="../../../assets/review-schedule.png" alt="review-schedule">
         <mat-card-content>

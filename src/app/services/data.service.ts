@@ -20,6 +20,7 @@ export class DataService {
   isLoggedIn: boolean = false;
   loggedInUserData: Employee;
   reviewFwaSelectedRequests: number;
+  reviewSelectedScheduleID: number;
 
   constructor() { }
 }
