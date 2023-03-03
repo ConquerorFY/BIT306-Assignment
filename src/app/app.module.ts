@@ -27,6 +27,7 @@ import { SubmitFwaComponent } from './components/submit-fwa/submit-fwa.component
 import { ReviewFwaComponent } from './components/review-fwa/review-fwa.component';
 import { UpdateScheduleComponent } from './components/update-schedule/update-schedule.component';
 import { ReviewScheduleComponent } from './components/review-schedule/review-schedule.component';
+import { ViewFwaAnalyticsComponent } from './components/view-fwa-analytics/view-fwa-analytics.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ReviewScheduleComponent } from './components/review-schedule/review-sch
     SubmitFwaComponent,
     ReviewFwaComponent,
     UpdateScheduleComponent,
-    ReviewScheduleComponent
+    ReviewScheduleComponent,
+    ViewFwaAnalyticsComponent
   ],
   imports: [
     BrowserModule,

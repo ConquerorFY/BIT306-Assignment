@@ -2,7 +2,7 @@
     {
         "scheduleID": 1,
         "date": "2023-01-01",
-        "workLocation": "Home",
+        "workLocation": "flexi-hours",
         "workHours": "8am - 4pm",
         "workReport": "None",
         "supervisorComments": "Still under review",
@@ -11,7 +11,7 @@
     {
         "scheduleID": 2,
         "date": "2023-01-02",
-        "workLocation": "Hybrid",
+        "workLocation": "work-from-home",
         "workHours": "9am - 5pm",
         "workReport": "None",
         "supervisorComments": "Still under review",
@@ -20,7 +20,7 @@
     {
         "scheduleID": 3,
         "date": "2023-01-01",
-        "workLocation": "Ofice",
+        "workLocation": "hybrid",
         "workHours": "10am - 6pm",
         "workReport": "None",
         "supervisorComments": "Still under review",
@@ -29,7 +29,7 @@
     {
         "scheduleID": 4,
         "date": "2023-01-02",
-        "workLocation": "Home",
+        "workLocation": "flexi-hours",
         "workHours": "8am - 4pm",
         "workReport": "None",
         "supervisorComments": "Still under review",
@@ -38,7 +38,7 @@
     {
         "scheduleID": 5,
         "date": "2023-01-01",
-        "workLocation": "Hybrid",
+        "workLocation": "work-from-home",
         "workHours": "9am - 5pm",
         "workReport": "None",
         "supervisorComments": "Still under review",

@@ -12,7 +12,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card appearance="outlined" class="home-card" *ngIf="dataService.loggedInUserData.position === 'admin' || dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('')">
+    <mat-card appearance="outlined" class="home-card" *ngIf="dataService.loggedInUserData.position === 'admin' || dataService.loggedInUserData.position === 'supervisor'" (click)="navigate('viewFWAAnalytics')">
         <mat-card-header>
             <mat-card-title class="home-card-title">View FWA Analytics</mat-card-title>
         </mat-card-header>

@@ -1,0 +1,143 @@
+<div class="view-fwa-container">
+
+    <h1>View FWA Analytics Page</h1>
+
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab label="All">
+            <div class="all-tab-container">
+                <mat-card appearance="outlined" class="all-tab-fwa-card">
+                    <mat-card-header>
+                        <mat-card-title class="all-tab-fwa-card-title">Flexi Hours Employees</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image class="all-tab-fwa-card-image" src="../../../assets/flexi-hours.png"
+                        alt="flexi-hours-employees-count">
+                    <mat-card-content>
+                        <p class="all-tab-fwa-card-content">
+                            Employee Count: {{ totalFlexiHoursCount }}
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card appearance="outlined" class="all-tab-fwa-card">
+                    <mat-card-header>
+                        <mat-card-title class="all-tab-fwa-card-title">Work From Home Employees</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image class="all-tab-fwa-card-image" src="../../../assets/work-from-home.png"
+                        alt="work-from-home-employees-count">
+                    <mat-card-content>
+                        <p class="all-tab-fwa-card-content">
+                            Employee Count: {{ totalWorkFromHomeCount }}
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card appearance="outlined" class="all-tab-fwa-card">
+                    <mat-card-header>
+                        <mat-card-title class="all-tab-fwa-card-title">Hybrid Employees</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image class="all-tab-fwa-card-image" src="../../../assets/hybrid.png"
+                        alt="hybrid-employees-count">
+                    <mat-card-content>
+                        <p class="all-tab-fwa-card-content">
+                            Employee Count: {{ totalHybridCount }}
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-tab>
+        <mat-tab label="Departments">
+            <div class="department-tab-selection">
+                <h3>Department Selection: </h3>
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose an department: </mat-label>
+                    <mat-select [formControl]="selectedDepartment" (selectionChange)="findAllDepartmentFWACount()">
+                        <mat-option *ngFor="let department of departmentsList" [value]="department.value">{{
+                            "Department ID #" + department.id }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span>You have selected the <b>{{ selectedDepartment.value.length > 0 ? selectedDepartment.value : '-'
+                        }}</b> department</span>
+            </div>
+
+            <div class="department-tab-contents">
+                <div class="department-tab-content" *ngFor="let d of departmentsCountList">
+                    <span class="color-indicator"></span>
+                    <mat-card class="department-fwa-container">
+                        <mat-card-content class="department-fwa-request">Date: {{ d.date }}</mat-card-content>
+                        <mat-card-content class="department-fwa-request">Number of FWA Requests: {{ d.count
+                            }}</mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Daily Schedules">
+            <div class="schedule-tab-selection">
+                <h3>Department Selection: </h3>
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose an department: </mat-label>
+                    <mat-select [formControl]="selectedDepartment">
+                        <mat-option *ngFor="let department of departmentsList" [value]="department.value">{{
+                            "Department ID #" + department.id }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span>You have selected the <b>{{ selectedDepartment.value.length > 0 ? selectedDepartment.value : '-'
+                        }}</b> department</span>
+            </div>
+
+            <div class="schedule-department">
+                <label id="schedule-radio-group-label">Please select a date: </label>
+                <mat-form-field appearance="fill" class="schedule-radio-group">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="datepicker" (dateInput)="getDateSchedule($event.value)">
+                    <mat-hint>MM/DD</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker>
+                    </mat-datepicker>
+                </mat-form-field>
+                <label class="chosen-date">All employees' work schedule on <b>{{ selectedDate }} </b></label>
+            </div>
+
+            <table mat-table [dataSource]="[scheduleData]" class="mat-elevation-z8"
+                *ngIf="selectedDate.length > 0">
+                <ng-container matColumnDef="Schedule ID">
+                    <th mat-header-cell *matHeaderCellDef> Schedule ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.scheduleID}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Schedule Date">
+                    <th mat-header-cell *matHeaderCellDef> Schedule Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Work Location">
+                    <th mat-header-cell *matHeaderCellDef> Work Location </th>
+                    <td mat-cell *matCellDef="let element"> {{element.workLocation}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Work Hours">
+                    <th mat-header-cell *matHeaderCellDef> Work Hours </th>
+                    <td mat-cell *matCellDef="let element"> {{element.workHours}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Work Report">
+                    <th mat-header-cell *matHeaderCellDef> Work Report </th>
+                    <td mat-cell *matCellDef="let element"> {{element.workReport}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Supervisor Comments">
+                    <th mat-header-cell *matHeaderCellDef> Supervisor Comments </th>
+                    <td mat-cell *matCellDef="let element"> {{element.supervisorComments}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Employee ID">
+                    <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+                    <td mat-cell *matCellDef="let element" class="employee-id-column"> {{element.employeeID}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

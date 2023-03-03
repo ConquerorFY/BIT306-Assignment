@@ -23,7 +23,7 @@
         <div class="update-schedule-form">
             <mat-form-field appearance="fill">
                 <mat-label>Enter employee's work location</mat-label>
-                <input matInput placeholder="eg. Home / Office" [formControl]="location" required>
+                <input matInput placeholder="eg. flexi-hours / work-from-home / hybrid" [formControl]="location" required>
                 <mat-error *ngIf="location.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
