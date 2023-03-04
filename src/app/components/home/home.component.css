@@ -25,6 +25,12 @@ h1 {
     margin-bottom: 10px;
 }
 
+.mat-mdc-card-header {
+    display: block;
+    text-align: center;
+    padding: 16px;
+}
+
 .home-card-image {
     width: 200px;
     margin: auto;

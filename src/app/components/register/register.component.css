@@ -14,6 +14,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: 30px;
     margin-bottom: 50px;
     font-size: 1.2em;
 }
@@ -25,12 +26,8 @@
     font-size: 0.9em;
 }
 
-.registration-radio-group {
-    display: flex;
-    flex-direction: row;
-    margin: 15px 0 15px 20px;
-    align-items: flex-start;
-    font-weight: bold;
+#registration-radio-group-label {
+    margin-right: 30px;
 }
 
 .registration-form {
@@ -55,4 +52,9 @@
     margin-top: 30px;
     width: 20%;
     margin-left: auto;
+}
+
+.supervisor-name {
+    font-size: 1.2em;
+    margin-top: 10px;
 }

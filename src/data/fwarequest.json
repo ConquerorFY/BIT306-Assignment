@@ -48,5 +48,85 @@
         "status": "Rejected",
         "comment": "",
         "employeeID": "e013"
+    },
+    {
+        "requestID": 6,
+        "requestDate": "2020-1-2",
+        "workType": "hybrid",
+        "description": "None",
+        "reason": "Too late",
+        "status": "Accepted",
+        "comment": "",
+        "employeeID": "e001"
+    },
+    {
+        "requestID": 7,
+        "requestDate": "2020-1-2",
+        "workType": "hybrid",
+        "description": "None",
+        "reason": "Too late",
+        "status": "Accepted",
+        "comment": "",
+        "employeeID": "e011"
+    },
+    {
+        "requestID": 8,
+        "requestDate": "2020-1-3",
+        "workType": "hybrid",
+        "description": "None",
+        "reason": "Very Jam",
+        "status": "Rejected",
+        "comment": "",
+        "employeeID": "e001"
+    },
+    {
+        "requestID": 9,
+        "requestDate": "2023-1-2",
+        "workType": "hybrid",
+        "description": "None",
+        "reason": "Too late",
+        "status": "Pending",
+        "comment": "",
+        "employeeID": "e012"
+    },
+    {
+        "requestID": 10,
+        "requestDate": "2023-1-3",
+        "workType": "hybrid",
+        "description": "None",
+        "reason": "Very lazy",
+        "status": "Pending",
+        "comment": "",
+        "employeeID": "e012"
+    },
+    {
+        "requestID": 11,
+        "requestDate": "2023-1-2",
+        "workType": "hybrid",
+        "description": "None",
+        "reason": "Too late",
+        "status": "Accepted",
+        "comment": "",
+        "employeeID": "e002"
+    },
+    {
+        "requestID": 12,
+        "requestDate": "2023-1-3",
+        "workType": "hybrid",
+        "description": "None",
+        "reason": "Very lazy",
+        "status": "Rejected",
+        "comment": "",
+        "employeeID": "e002"
+    },
+    {
+        "requestID": 13,
+        "requestDate": "2020-3-3",
+        "workType": "hybrid",
+        "description": "None",
+        "reason": "Too slow",
+        "status": "Rejected",
+        "comment": "",
+        "employeeID": "e012"
     }
 ]
