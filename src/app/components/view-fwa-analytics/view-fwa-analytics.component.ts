@@ -138,9 +138,9 @@ export class ViewFwaAnalyticsComponent implements OnInit {
     // Get all employees for the selected department
     employeeList = this.getAllEmployeesFromSelectedDepartment(this.dataService.users, selectedDepartmentID);
 
-    // Get all daily schedules that matches the date
+    // Get all daily schedules that matches the date and department
     for (let s of this.dataService.schedules) {
-      if (s.date === this.selectedDate) {
+      if (s.date === this.selectedDate && employeeList.indexOf(s.employeeID) > -1) {
         scheduleData.push(s);
       }
     }
