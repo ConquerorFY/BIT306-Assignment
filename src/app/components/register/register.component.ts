@@ -17,9 +17,27 @@ export class RegisterComponent implements OnInit {
   position = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
 
+  displayedColumns = [
+    "Employee ID",
+    "Employee Name",
+    "Employee Email",
+    "Employee Position",
+    "Employee Department"
+  ]
+  usersList = this.dataService.users;
+
   constructor(private dataService: DataService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+  }
+
+  findDeptName(deptID: number) {
+    for (let d of this.department) {
+      if (d.deptID === deptID) {
+        return d.deptName;
+      }
+    }
+    return '-';
   }
 
   getErrorMessage(formControl: FormControl) {

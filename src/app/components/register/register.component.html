@@ -3,13 +3,46 @@
 
     <div class="registration-department">
         <label id="registration-radio-group-label">Please select a department: </label>
-        <mat-radio-group aria-labelledby="registration-radio-group-label" class="registration-radio-group"
-            [(ngModel)]="selectedDepartment">
-            <mat-radio-button class="registration-radio-button" *ngFor="let d of department" [value]="d.deptName">
-                {{"Department ID " + d.deptID}}
-            </mat-radio-button>
-        </mat-radio-group>
+        <mat-form-field appearance="fill">
+            <mat-label>Choose an department</mat-label>
+            <mat-select [(ngModel)]="selectedDepartment">
+                <mat-option *ngFor="let d of department" [value]="d.deptName">{{ "Department ID " + d.deptID
+                    }}</mat-option>
+            </mat-select>
+        </mat-form-field>
         <label class="chosen-department">You have selected the <b>{{ selectedDepartment }} </b> department</label>
+    </div>
+
+    <div class="registration-table" *ngIf="selectedDepartment.length < 1">
+        <table mat-table [dataSource]="usersList" class="mat-elevation-z8">
+            <ng-container matColumnDef="Employee ID">
+                <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.employeeID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Employee Name">
+                <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Employee Email">
+                <th mat-header-cell *matHeaderCellDef> Employee Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Employee Position">
+                <th mat-header-cell *matHeaderCellDef> Employee Position </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Employee Department">
+                <th mat-header-cell *matHeaderCellDef> Employee Department </th>
+                <td mat-cell *matCellDef="let element"> {{findDeptName(element.deptID)}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
     </div>
 
     <div class="registration-form" *ngIf="selectedDepartment.length > 0">
@@ -35,10 +68,10 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Enter employee's supervisor employee ID</mat-label>
-            <input matInput placeholder="eg. e009" [formControl]="supervisorId" required>
+            <input matInput placeholder="eg. e009" [formControl]="supervisorId">
             <mat-error *ngIf="supervisorId.invalid">{{getErrorMessage(supervisorId)}}</mat-error>
-            <mat-hint *ngIf="supervisorId.valid">{{ "Supervisor Name: " + findSupervisorName(supervisorId.value)
-                }}</mat-hint>
+            <mat-hint class="supervisor-name" *ngIf="supervisorId.valid">{{ "Supervisor Name: "}}
+                <b>{{findSupervisorName(supervisorId.value)}}</b></mat-hint>
         </mat-form-field>
 
         <button mat-raised-button color="primary" (click)="submitForm()">Register</button>
