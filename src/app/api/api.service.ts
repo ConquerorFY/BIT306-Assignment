@@ -92,4 +92,8 @@ export class ApiService {
   getNewScheduleID() {
     return this.http.get(`${this.baseUrl + this.scheduleUrl}/getNewScheduleID`);
   }
+
+  getScheduleBasedOnID(data: any) {
+    return this.http.post(`${this.baseUrl + this.scheduleUrl}/getScheduleBasedOnID`, data);
+  }
 }

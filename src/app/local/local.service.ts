@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LocalService {
   selectedFwaRequestsID: number = 0;
+  selectedScheduleID: number = 0;
 
   constructor() { }
 

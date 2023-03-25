@@ -4,8 +4,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import moment from 'moment';
-import Schedule from 'src/app/interfaces/schedule';
-import { DataService } from 'src/app/services/data.service';
+import { ApiService } from 'src/app/api/api.service';
+import { LocalService } from 'src/app/local/local.service';
 
 export const MY_FORMATS_ORG = {
   parse: {
@@ -39,9 +39,13 @@ export class ReviewScheduleComponent {
     "Supervisor Comments",
     "Employee ID"
   ];
-  scheduleData: Schedule[];
+  scheduleData: any;
 
-  constructor(private dataService: DataService, public dialog: MatDialog) { }
+  constructor(
+    private apiService: ApiService,
+    private localService: LocalService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
   }
@@ -52,25 +56,14 @@ export class ReviewScheduleComponent {
   }
 
   getEmployeeWorkSchedules(): void {
-    const supvID = this.dataService.loggedInUserData.employeeID;
-    let employeeIDs: string[] = []; // need to initialize an empty array if want to straight use push() or other array methods without assigning an array (as below)
-    let scheduleData: Schedule[] = [];
-
-    // Get all employee IDs under the supervisor
-    for (let i = 0; i < this.dataService.users.length; i++) {
-      if (this.dataService.users[i].supvID === supvID) employeeIDs.push(this.dataService.users[i].employeeID);
-    }
-
-    // Get all work schedules related to the employee IDs and with the same selected date
-    for (let i = 0; i < this.dataService.schedules.length; i++) {
-      if (employeeIDs.indexOf(this.dataService.schedules[i].employeeID) > -1 && this.dataService.schedules[i].date === this.selectedDate) scheduleData.push(this.dataService.schedules[i]);
-    }
-
-    this.scheduleData = scheduleData;
+    const supvID = this.localService.getUserData().employeeID;
+    this.apiService.getSchedules({ employeeID: supvID }).subscribe((data: any) => {
+      this.scheduleData = data.filter(s => s.date === this.selectedDate);
+    })
   }
 
   openDialog(scheduleId: number): void {
-    this.dataService.reviewSelectedScheduleID = scheduleId;
+    this.localService.selectedScheduleID = scheduleId;
     this.dialog.open(DialogAnimationsExampleDialog);
   }
 }
@@ -81,19 +74,24 @@ export class ReviewScheduleComponent {
   styleUrls: ['./dialog-animations-example-dialog.css']
 })
 export class DialogAnimationsExampleDialog implements OnInit {
-  selectedSchedule: Schedule;
+  selectedSchedule: any;
   comments = '';
 
-  constructor(public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>, public dataService: DataService, private router: Router) { }
+  constructor(
+    public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>,
+    public apiService: ApiService,
+    public localService: LocalService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.getSelectedRequestsData();
   }
 
   getSelectedRequestsData() {
-    this.selectedSchedule = this.dataService.schedules.filter((data) => {
-      return data.scheduleID === this.dataService.reviewSelectedScheduleID;
-    })[0];
+    this.apiService.getScheduleBasedOnID({ scheduleID: this.localService.selectedScheduleID }).subscribe((data: any) => {
+      if (data.isSuccess) this.selectedSchedule = data.data;
+    })
   }
 
   inputValue(e: any) {
@@ -103,14 +101,16 @@ export class DialogAnimationsExampleDialog implements OnInit {
 
   handleClick(status: string) {
     if (status === "Save") {
-      // set schedule comment
-      for (let i = 0; i < this.dataService.schedules.length; i++) {
-        if (this.dataService.schedules[i].scheduleID === this.selectedSchedule.scheduleID) {
-          this.dataService.schedules[i].supervisorComments = this.comments;
-        }
+      let newScheduleData = {
+        ...this.selectedSchedule,
+        supervisorComments: this.comments
       }
-      this.dialogRef.close();
-      this.router.navigate(['/home']);
+      this.apiService.updateSchedule(newScheduleData).subscribe((data: any) => {
+        if (data.isUpdated) {
+          this.dialogRef.close();
+          this.router.navigate(['/home']);
+        }
+      })
     } else if (status === "Cancel") {
       this.dialogRef.close();
     }
