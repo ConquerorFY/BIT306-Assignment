@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import FWA from 'src/app/interfaces/fwa';
+import { ApiService } from 'src/app/api/api.service';
+import { LocalService } from 'src/app/local/local.service';
 
 @Component({
   selector: 'app-review-fwa',
@@ -20,39 +20,33 @@ export class ReviewFwaComponent implements OnInit {
     "Comment",
     "Employee ID"
   ];
-  pendingRequests = this.findEmployeeRequests("Pending");
-  acceptedRequests = this.findEmployeeRequests("Accepted");
-  rejectedRequests = this.findEmployeeRequests("Rejected");
+  pendingRequests: any;
+  acceptedRequests: any;
+  rejectedRequests: any;
 
-  constructor(private dataService: DataService, public dialog: MatDialog) { }
+  constructor(
+    private apiService: ApiService,
+    private localService: LocalService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
+    this.findEmployeeRequests();
   }
 
-  findEmployeeRequests(status: string) {
-    const supvId = this.dataService.loggedInUserData.employeeID;
-    let employeeIdList = [];
-    let requests = [];
-
-    // Find all employee id under the supervisor
-    for (let e of this.dataService.users) {
-      if (e?.supvID === supvId) {
-        employeeIdList.push(e.employeeID);
+  findEmployeeRequests() {
+    const supvId = this.localService.getUserData().employeeID;
+    this.apiService.getFWA({ employeeID: supvId }).subscribe((data: any) => {
+      if (data.isSucceed) {
+        this.pendingRequests = data.data.pending;
+        this.acceptedRequests = data.data.accepted;
+        this.rejectedRequests = data.data.rejected;
       }
-    }
-
-    // Find all the employees' request based on status
-    for (let r of this.dataService.fwa) {
-      if (employeeIdList.indexOf(r.employeeID) > -1 && r.status === status) {
-        requests.push(r);
-      }
-    }
-
-    return requests;
+    });
   }
 
   openDialog(requestId: number): void {
-    this.dataService.reviewFwaSelectedRequests = requestId;
+    this.localService.selectedFwaRequestsID = requestId;
     this.dialog.open(DialogAnimationsExampleDialog);
   }
 }
@@ -63,19 +57,38 @@ export class ReviewFwaComponent implements OnInit {
   styleUrls: ['./dialog-animations-example-dialog.css']
 })
 export class DialogAnimationsExampleDialog implements OnInit {
-  selectedRequest: FWA;
+  selectedRequest: any;
+  employeeList: any;
   comments = '';
 
-  constructor(public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>, public dataService: DataService, private router: Router) { }
+  constructor(
+    public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>,
+    public apiService: ApiService,
+    public localService: LocalService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.getSelectedRequestsData();
+    this.getEmployeesList();
   }
 
   getSelectedRequestsData() {
-    this.selectedRequest = this.dataService.fwa.filter((data) => {
-      return data.requestID === this.dataService.reviewFwaSelectedRequests;
-    })[0];
+    this.apiService.getSingleFWA({ requestID: this.localService.selectedFwaRequestsID }).subscribe((data: any) => {
+      if (data.isSucceed) this.selectedRequest = data.data;
+    })
+  }
+
+  getEmployeesList() {
+    this.apiService.getEmployees().subscribe((data: any) => {
+      if (data.isSucess) {
+        this.employeeList = data.data;
+      }
+    })
+  }
+
+  getSelectedEmployee(empId: string) {
+    return this.employeeList.filter((e) => e.employeeID === empId)[0];
   }
 
   inputValue(e: any) {
@@ -84,20 +97,25 @@ export class DialogAnimationsExampleDialog implements OnInit {
   }
 
   handleClick(status: string) {
-    // set request status and comment
-    for (let i = 0; i < this.dataService.fwa.length; i++) {
-      if (this.dataService.fwa[i].requestID === this.selectedRequest.requestID) {
-        this.dataService.fwa[i].status = status;
-        this.dataService.fwa[i].comment = this.comments;
-      }
+    let newFWARequestData = {
+      ...this.selectedRequest,
+      status,
+      comment: this.comments,
     }
-    // set employee status
-    for(let i = 0; i < this.dataService.users.length; i++) {
-      if (this.dataService.users[i].employeeID === this.selectedRequest.employeeID) {
-        this.dataService.users[i].FWAStatus = status;
-      }
+    let newEmployeeData = {
+      ...this.getSelectedEmployee(this.selectedRequest.employeeID),
+      FWAStatus: this.selectedRequest.workType
     }
-    this.dialogRef.close();
-    this.router.navigate(['/home']);
+
+    this.apiService.updateFWA(newFWARequestData).subscribe((data: any) => {
+      if (data.isUpdated) {
+        this.apiService.updateEmployee(newEmployeeData).subscribe((data: any) => {
+          if (data.isSuccess) {
+            this.dialogRef.close();
+            this.router.navigate(['/home']);
+          }
+        })
+      }
+    })
   }
 }

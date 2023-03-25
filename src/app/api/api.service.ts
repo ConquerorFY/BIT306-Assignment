@@ -49,12 +49,20 @@ export class ApiService {
     return this.http.get(`${this.baseUrl + this.employeeUrl}/getEmployees`);
   }
 
+  updateEmployee(data: any) {
+    return this.http.post(`${this.baseUrl + this.employeeUrl}/updateEmployee`, data);
+  }
+
   insertFWA(data: any) {
     return this.http.post(`${this.baseUrl + this.fwaUrl}/insertFWA`, data);
   }
 
   getFWA(data: any) {
     return this.http.post(`${this.baseUrl + this.fwaUrl}/getFWA`, data);
+  }
+
+  getSingleFWA(data: any) {
+    return this.http.post(`${this.baseUrl + this.fwaUrl}/getFWARequest`, data);
   }
 
   updateFWA(data: any) {

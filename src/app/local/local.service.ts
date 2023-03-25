@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LocalService {
+  selectedFwaRequestsID: number = 0;
+
   constructor() { }
 
   writeToLocalCache(data: any) {
