@@ -88,4 +88,8 @@ export class ApiService {
   updateSchedule(data: any) {
     return this.http.post(`${this.baseUrl + this.scheduleUrl}/updateSchedule`, data);
   }
+
+  getNewScheduleID() {
+    return this.http.get(`${this.baseUrl + this.scheduleUrl}/getNewScheduleID`);
+  }
 }

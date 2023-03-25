@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { DataService } from 'src/app/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import moment from 'moment';
-import Schedule from 'src/app/interfaces/schedule';
-import Employee from 'src/app/interfaces/employee';
-import { Router } from '@angular/router';
+import { ApiService } from 'src/app/api/api.service';
+import { LocalService } from 'src/app/local/local.service';
 
 export const MY_FORMATS_ORG = {
   parse: {
@@ -31,43 +29,61 @@ export const MY_FORMATS_ORG = {
   ],
 })
 export class UpdateScheduleComponent implements OnInit {
-  employeeData: Employee;
-  scheduleData: Schedule;
+  employeeData: any;
+  employeesList: any;
+  scheduleData: any;
   selectedDate: string = '';
+  newScheduleID: number = 0;
+
   location = new FormControl('', [Validators.required]);
   hours = new FormControl('', [Validators.required]);
   report = new FormControl('', [Validators.required]);
   buttonText: string;
 
-  constructor(private dataService: DataService, private _snackBar: MatSnackBar, private router: Router) { }
+  constructor(
+    private apiService: ApiService,
+    private localService: LocalService,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.employeeData = this.dataService.loggedInUserData;
+    this.getUserData();
+    this.getEmployeesList();
+    this.generateScheduleID();
   }
 
   getErrorMessage() {
     return 'You must enter a value!'; // assume all errors are Validators.required errors
   }
 
-  getDateSchedule(date: string) {
-    this.selectedDate = moment(date).format('Y-MM-DD');
-    if (this.getDateScheduleIfExist()) {
-      this.scheduleData = this.getDateScheduleIfExist();
-      this.location.setValue(this.scheduleData.workLocation);
-      this.hours.setValue(this.scheduleData.workHours);
-      this.report.setValue(this.scheduleData.workReport);
-      this.buttonText = 'Update';
-    } else {
-      this.scheduleData = null;
-      this.buttonText = 'Create';
-    }
+  getUserData() {
+    this.employeeData = this.localService.getUserData();
   }
 
-  findSupervisorName(id: string) {
-    const matchedSupervisor = this.dataService.users.filter((data) => {
-      return data.employeeID === id;
-    })[0]
+  getEmployeesList() {
+    this.apiService.getEmployees().subscribe((data: any) => {
+      if (data.isSucess) this.employeesList = data.data;
+    })
+  }
 
+  getDateSchedule(date: string) {
+    this.resetForm();
+    this.selectedDate = moment(date).format('Y-MM-DD');
+    this.apiService.getSchedule({ date: this.selectedDate, employeeID: this.employeeData.employeeID }).subscribe((data: any) => {
+      if (data.isFound) {
+        this.scheduleData = data.data;
+        this.location.setValue(this.scheduleData.workLocation);
+        this.hours.setValue(this.scheduleData.workHours);
+        this.report.setValue(this.scheduleData.workReport);
+        this.buttonText = 'Update';
+      } else {
+        this.scheduleData = null;
+        this.buttonText = 'Create';
+      }
+    })
+  }
+
+  findSupervisorName(supvID: string) {
+    const matchedSupervisor = this.employeesList.filter(e => e.employeeID === supvID)[0];
     return matchedSupervisor?.name ? matchedSupervisor?.name : '-';
   }
 
@@ -78,61 +94,47 @@ export class UpdateScheduleComponent implements OnInit {
     this.report.reset();
   }
 
-  getDateScheduleIfExist(): Schedule {
-    for (let schedule of this.dataService.schedules) {
-      if (schedule.date === this.selectedDate) {
-        return schedule;
-      }
-    }
-    return null;
-  }
-
-  removeExistingDateScheduleIfAny() {
-    let targetIndex = 0;
-    for (targetIndex; targetIndex < this.dataService.schedules.length; targetIndex++) {
-      if (this.selectedDate === this.dataService.schedules[targetIndex].date) break;
-    }
-    if (targetIndex < this.dataService.schedules.length) this.dataService.schedules.splice(targetIndex, 1);
-  }
-
   generateScheduleID() {
-    let maxID = 0;
-    for (let schedule of this.dataService.schedules) {
-      if (schedule.scheduleID > maxID) {
-        maxID = schedule.scheduleID;
-      }
-    }
-    return maxID + 1;
+    this.apiService.getNewScheduleID().subscribe((data: any) => {
+      if (data.isSuccess) this.newScheduleID = data.id;
+    })
   }
 
   submitForm() {
-    let newSchedule: Schedule;
+    let newSchedule: any;
     if (this.scheduleData) {
-      this.removeExistingDateScheduleIfAny();
       newSchedule = {
         ...this.scheduleData,
         workLocation: this.location.value,
         workHours: this.hours.value,
         workReport: this.report.value
       };
+      this.apiService.updateSchedule(newSchedule).subscribe((data: any) => {
+        if (data.isUpdated) {
+          this.openSnackBar("Successfully Updated Daily Schedule!", "Close");
+          this.resetForm();
+        }
+      });
     } else {
       newSchedule = {
-        scheduleID: this.generateScheduleID(),
+        scheduleID: this.newScheduleID,
         date: this.selectedDate,
         workLocation: this.location.value,
         workHours: this.hours.value,
         workReport: this.report.value,
         supervisorComments: "",
         employeeID: this.employeeData.employeeID
-      }
+      };
+      this.apiService.insertSchedule(newSchedule).subscribe((data: any) => {
+        if (data.isSuccess) {
+          this.openSnackBar(data.message, "Close");
+          this.resetForm();
+        }
+      })
     }
-    this.dataService.schedules.push(newSchedule);
-    this.openSnackBar("Successfully Updated Daily Schedule!", "Close");
-    this.resetForm();
   }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
   }
-
 }
