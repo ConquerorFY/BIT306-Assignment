@@ -38,7 +38,7 @@ export class ApiService {
   }
 
   getEmployeeFWACount() {
-    return this.http.get(`${this.baseUrl + this.fwaUrl}/getEmployeeFWACount`);
+    return this.http.get(`${this.baseUrl + this.employeeUrl}/getEmployeeFWACount`);
   }
 
   getSupervisors() {
