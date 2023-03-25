@@ -61,6 +61,10 @@ export class ApiService {
     return this.http.post(`${this.baseUrl + this.fwaUrl}/updateFWA`, data);
   }
 
+  getNewFWARequestID() {
+    return this.http.get(`${this.baseUrl + this.fwaUrl}/getNewFWARequestID`);
+  }
+
   insertSchedule(data: any) {
     return this.http.post(`${this.baseUrl + this.scheduleUrl}/insertSchedule`, data);
   }

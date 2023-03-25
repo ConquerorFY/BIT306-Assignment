@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApiService } from 'src/app/api/api.service';
+import { LocalService } from 'src/app/local/local.service';
 
 @Component({
   selector: 'app-submit-fwa',
@@ -13,9 +14,18 @@ export class SubmitFwaComponent implements OnInit {
   description = new FormControl('', [Validators.required]);
   reason = new FormControl('', [Validators.required]);
 
-  constructor(private dataService: DataService, private _snackBar: MatSnackBar) { }
+  newRequestID: number = 0;
+
+  constructor(
+    private apiService: ApiService,
+    private localService: LocalService,
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
+    this.apiService.getNewFWARequestID().subscribe((data: any) => {
+      if (data.isSucceed) this.newRequestID = data.id;
+    })
   }
 
   getErrorMessage(formControl: FormControl) {
@@ -28,22 +38,18 @@ export class SubmitFwaComponent implements OnInit {
     this.reason.reset();
   }
 
-  getLastRequestID() {
-    return this.dataService.fwa.length;
-  }
-
   getCurrentDate() {
     let date = new Date();
     return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
   }
 
   getEmployeeID() {
-    return this.dataService.loggedInUserData.employeeID;
+    return this.localService.getUserData().employeeID;
   }
 
   submitForm() {
     let newFwa = {
-      requestID: this.getLastRequestID() + 1,
+      requestID: this.newRequestID,
       requestDate: this.getCurrentDate(),
       workType: this.workType.value,
       description: this.description.value,
@@ -52,10 +58,12 @@ export class SubmitFwaComponent implements OnInit {
       comment: "",
       employeeID: this.getEmployeeID()
     };
-    this.dataService.fwa.push(newFwa);
-    this.openSnackBar("Successfully Submitted New FWA Request!", "Close");
-    this.resetForm();
-    console.log(this.dataService.fwa);
+    this.apiService.insertFWA(newFwa).subscribe((data: any) => {
+      if (data.isSucceed) {
+        this.openSnackBar(data.message, "Close");
+        this.resetForm();
+      }
+    })
   }
 
   openSnackBar(message: string, action: string) {
