@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import Employee from 'src/app/interfaces/employee';
-import { DataService } from 'src/app/services/data.service';
+import { LocalService } from 'src/app/local/local.service';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +8,8 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  userData: Employee[];
 
-  constructor(public dataService: DataService, private router: Router) { }
+  constructor(public localService: LocalService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -19,5 +17,4 @@ export class HomeComponent implements OnInit {
   navigate(path: string) {
     this.router.navigate([`/${path}`]);
   }
-
 }

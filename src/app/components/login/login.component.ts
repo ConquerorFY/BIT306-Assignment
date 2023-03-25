@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
+import { ApiService } from 'src/app/api/api.service';
+import { LocalService } from 'src/app/local/local.service';
 
 @Component({
   selector: 'app-login',
@@ -13,37 +14,31 @@ export class LoginComponent implements OnInit {
   show: boolean = false;
   showString: string = "";
 
-  constructor(private router: Router, private dataService: DataService) { }
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private localService: LocalService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  validateLogin(): boolean {
-    for (let i = 0; i < this.dataService.users.length; i++) {
-      if (this.dataService.users[i].employeeID === this.employeeID) {
-        if (this.dataService.users[i].password === this.password) {
-          this.dataService.isLoggedIn = true;
-          this.dataService.loggedInUserData = this.dataService.users[i]
-          this.showString = "Login success !!";
-          return true;
-        } else {
-          this.showString = "Invalid Password!";
-          return false;
-        }
+  validateLogin() {
+    const formBody = { employeeID: this.employeeID, password: this.password };
+    this.apiService.login(formBody).subscribe((data: any) => {
+      if (data.isSucceed) {
+        this.showString = data.message;
+        this.localService.writeToLocalCache(data.data);
+        this.router.navigate(['/home'])
+      } else {
+        this.showString = data.message;
       }
-    }
-    this.dataService.isLoggedIn = false;
-    this.showString = "Invalid Employee ID!";
-    return false;
+    })
   }
 
   submit() {
-    const validate = this.validateLogin();
+    this.validateLogin();
     this.clear();
-
-    if (validate) {
-      this.router.navigate(['/home']);
-    }
   }
 
   clear() {

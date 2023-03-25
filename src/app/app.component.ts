@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import Employee from './interfaces/employee';
-import { DataService } from './services/data.service';
+import { ApiService } from './api/api.service';
+import { LocalService } from './local/local.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +12,17 @@ import { DataService } from './services/data.service';
 export class AppComponent {
   title = 'bit306';
   isLoginPage = false;
-  userData: Employee;
+  userData: any;
+  dataLoaded: boolean = false;
 
-  constructor(private router: Router, private dataService: DataService) {
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private localService: LocalService
+  ) {
     router.events.pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(_ => {
-        if (!this.dataService.isLoggedIn) {
+        if (!this.localService.isLoggedIn()) {
           this.isLoginPage = true;
           this.router.navigate(['/login']);
         } else {
@@ -27,15 +32,20 @@ export class AppComponent {
           } else {
             this.isLoginPage = false;
           }
-          this.userData = this.dataService.loggedInUserData
+          this.userData = this.localService.userData;
+          this.dataLoaded = true;
         }
       });
   }
 
   logout() {
-    this.dataService.loggedInUserData = null;
-    this.dataService.isLoggedIn = false;
-    this.router.navigate(["/login"]);
+    this.apiService.logout({}).subscribe((data: any) => {
+      if (data.isLogout) {
+        this.localService.clearLocalCache();
+        this.userData = {};
+        this.router.navigate(["/login"]);
+      }
+    })
   }
 
   navigate(route) {

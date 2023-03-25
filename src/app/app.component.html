@@ -1,6 +1,6 @@
 <router-outlet *ngIf="isLoginPage"></router-outlet>
 
-<mat-drawer-container *ngIf="!isLoginPage" class="nav-container" autosize>
+<mat-drawer-container *ngIf="!isLoginPage && dataLoaded" class="nav-container" autosize>
     <mat-drawer #drawer class="nav-sidenav" mode="side">
         <img
             [src]="userData.position === 'employee' ? '/assets/employee.png' : userData.position === 'supervisor' ? '/assets/supervisor.png' : userData.position === 'admin' ? '/assets/admin.png' : ''" />
