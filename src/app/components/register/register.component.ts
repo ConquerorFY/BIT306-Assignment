@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { DataService } from 'src/app/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApiService } from 'src/app/api/api.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +10,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class RegisterComponent implements OnInit {
   selectedDepartment: string = '';
-  department = this.dataService.department;
+  selectedSupervisorName: string = '-';
+
+  department: any;
   employeeId = new FormControl('', [Validators.required]);
   supervisorId = new FormControl('', []);
   name = new FormControl('', [Validators.required]);
@@ -24,11 +26,16 @@ export class RegisterComponent implements OnInit {
     "Employee Position",
     "Employee Department"
   ]
-  usersList = this.dataService.users;
+  usersList: any;
 
-  constructor(private dataService: DataService, private _snackBar: MatSnackBar) { }
+  constructor(
+    private apiService: ApiService,
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
+    this.getDepartmentList();
+    this.getEmployeesList();
   }
 
   findDeptName(deptID: number) {
@@ -48,18 +55,33 @@ export class RegisterComponent implements OnInit {
   }
 
   findSupervisorName(id: string) {
-    const matchedSupervisor = this.dataService.users.filter((data) => {
-      return data.employeeID === id;
-    })[0]
-
-    return matchedSupervisor?.name ? matchedSupervisor?.name : '-';
+    this.apiService.getSupervisors().subscribe((data: any) => {
+      if (data.isSucess) {
+        const allSupervisorsList = data.data;
+        const matchedSupervisor = allSupervisorsList.filter(s => s.employeeID === id)[0];
+        this.selectedSupervisorName = matchedSupervisor?.name;
+      } else {
+        this.selectedSupervisorName = '-'
+      }
+    })
   }
 
   findDepartmentID() {
-    const matchedDepartment = this.dataService.department.filter((data) => {
-      return data.deptName === this.selectedDepartment;
-    })[0];
-    return matchedDepartment.deptID;
+    return this.department.filter(d => d.deptName === this.selectedDepartment)[0].deptID;
+  }
+
+  getDepartmentList() {
+    this.apiService.getAllDepartments().subscribe((data: any) => {
+      this.department = data;
+    })
+  }
+
+  getEmployeesList() {
+    this.apiService.getEmployees().subscribe((data: any) => {
+      if (data.isSucess) {
+        this.usersList = data.data;
+      }
+    })
   }
 
   randomPasswordGenerator(length: number) {
@@ -100,9 +122,15 @@ export class RegisterComponent implements OnInit {
         "position": this.position.value,
         "deptID": this.findDepartmentID()
       };
-    this.dataService.users.push(newUser);
-    this.openSnackBar("Successfully Registered New User!", "Close");
-    this.resetForm();
+    this.apiService.registerAccount(newUser).subscribe((data: any) => {
+      if (data.isSucceed) {
+        this.openSnackBar(data.message, "Close");
+        this.resetForm();
+        this.getEmployeesList();
+      } else {
+        this.openSnackBar(data.message, "Close");
+      }
+    });
   }
 
   openSnackBar(message: string, action: string) {

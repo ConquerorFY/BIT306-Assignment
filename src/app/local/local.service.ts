@@ -4,13 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LocalService {
-  userData: any;
-
   constructor() { }
 
   writeToLocalCache(data: any) {
     localStorage.setItem("data", JSON.stringify(data));
-    this.getUserData();
   }
 
   isLoggedIn(): boolean {
@@ -20,11 +17,10 @@ export class LocalService {
   }
 
   getUserData() {
-    this.userData = JSON.parse(localStorage.getItem("data"));
+    return JSON.parse(localStorage.getItem("data"));
   }
 
   clearLocalCache() {
     localStorage.clear();
-    this.userData = {};
   }
 }

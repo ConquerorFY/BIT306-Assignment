@@ -41,6 +41,14 @@ export class ApiService {
     return this.http.get(`${this.baseUrl + this.fwaUrl}/getEmployeeFWACount`);
   }
 
+  getSupervisors() {
+    return this.http.get(`${this.baseUrl + this.employeeUrl}/getSupervisors`);
+  }
+
+  getEmployees() {
+    return this.http.get(`${this.baseUrl + this.employeeUrl}/getEmployees`);
+  }
+
   insertFWA(data: any) {
     return this.http.post(`${this.baseUrl + this.fwaUrl}/insertFWA`, data);
   }

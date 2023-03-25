@@ -32,7 +32,7 @@ export class AppComponent {
           } else {
             this.isLoginPage = false;
           }
-          this.userData = this.localService.userData;
+          this.userData = this.localService.getUserData();
           this.dataLoaded = true;
         }
       });

@@ -68,10 +68,11 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Enter employee's supervisor employee ID</mat-label>
-            <input matInput placeholder="eg. e009" [formControl]="supervisorId">
+            <input matInput placeholder="eg. e009" [formControl]="supervisorId"
+                (input)="findSupervisorName(supervisorId.value)">
             <mat-error *ngIf="supervisorId.invalid">{{getErrorMessage(supervisorId)}}</mat-error>
             <mat-hint class="supervisor-name" *ngIf="supervisorId.valid">{{ "Supervisor Name: "}}
-                <b>{{findSupervisorName(supervisorId.value)}}</b></mat-hint>
+                <b>{{ selectedSupervisorName }}</b></mat-hint>
         </mat-form-field>
 
         <button mat-raised-button color="primary" (click)="submitForm()">Register</button>
