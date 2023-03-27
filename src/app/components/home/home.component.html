@@ -14,8 +14,7 @@
     </mat-card>
 
     <mat-card appearance="outlined" class="home-card"
-        *ngIf="localService.getUserData().position === 'admin' || localService.getUserData().position === 'supervisor'"
-        (click)="navigate('viewFWAAnalytics')">
+        *ngIf="localService.getUserData().position === 'admin' || localService.getUserData().position === 'supervisor'">
         <mat-card-header>
             <mat-card-title class="home-card-title">View FWA Analytics</mat-card-title>
         </mat-card-header>
@@ -40,8 +39,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card appearance="outlined" class="home-card" *ngIf="localService.getUserData().position === 'supervisor'"
-        (click)="navigate('reviewSchedule')">
+    <mat-card appearance="outlined" class="home-card" *ngIf="localService.getUserData().position === 'supervisor'">
         <mat-card-header>
             <mat-card-title class="home-card-title">Review Employee Schedules</mat-card-title>
         </mat-card-header>
@@ -66,8 +64,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card appearance="outlined" class="home-card" *ngIf="localService.getUserData().position === 'employee'"
-        (click)="navigate('updateSchedule')">
+    <mat-card appearance="outlined" class="home-card" *ngIf="localService.getUserData().position === 'employee'">
         <mat-card-header>
             <mat-card-title class="home-card-title">Update Daily Schedule</mat-card-title>
         </mat-card-header>

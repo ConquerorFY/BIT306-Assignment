@@ -9,7 +9,6 @@ export class ApiService {
   private departmentUrl = "department";
   private employeeUrl = "employee";
   private fwaUrl = "fwa";
-  private scheduleUrl = "schedule";
 
   constructor(private http: HttpClient) { }
 
@@ -71,29 +70,5 @@ export class ApiService {
 
   getNewFWARequestID() {
     return this.http.get(`${this.baseUrl + this.fwaUrl}/getNewFWARequestID`);
-  }
-
-  insertSchedule(data: any) {
-    return this.http.post(`${this.baseUrl + this.scheduleUrl}/insertSchedule`, data);
-  }
-
-  getSchedule(data: any) {
-    return this.http.post(`${this.baseUrl + this.scheduleUrl}/getSchedule`, data);
-  }
-
-  getSchedules(data: any) {
-    return this.http.post(`${this.baseUrl + this.scheduleUrl}/getSchedules`, data);
-  }
-
-  updateSchedule(data: any) {
-    return this.http.post(`${this.baseUrl + this.scheduleUrl}/updateSchedule`, data);
-  }
-
-  getNewScheduleID() {
-    return this.http.get(`${this.baseUrl + this.scheduleUrl}/getNewScheduleID`);
-  }
-
-  getScheduleBasedOnID(data: any) {
-    return this.http.post(`${this.baseUrl + this.scheduleUrl}/getScheduleBasedOnID`, data);
   }
 }

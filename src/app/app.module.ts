@@ -26,9 +26,6 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SubmitFwaComponent } from './components/submit-fwa/submit-fwa.component';
 import { ReviewFwaComponent } from './components/review-fwa/review-fwa.component';
-import { UpdateScheduleComponent } from './components/update-schedule/update-schedule.component';
-import { ReviewScheduleComponent } from './components/review-schedule/review-schedule.component';
-import { ViewFwaAnalyticsComponent } from './components/view-fwa-analytics/view-fwa-analytics.component';
 
 @NgModule({
   declarations: [
@@ -37,10 +34,7 @@ import { ViewFwaAnalyticsComponent } from './components/view-fwa-analytics/view-
     HomeComponent,
     RegisterComponent,
     SubmitFwaComponent,
-    ReviewFwaComponent,
-    UpdateScheduleComponent,
-    ReviewScheduleComponent,
-    ViewFwaAnalyticsComponent
+    ReviewFwaComponent
   ],
   imports: [
     BrowserModule,
